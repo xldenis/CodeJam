@@ -1,6 +1,7 @@
 require 'socket'
 require 'celluloid'
 require 'sinatra'
+require 'sinatra-websocket'
 Dir["./app/**/*.rb"].each {|file| load file}
 require './app'
 SPEED = {:fast => 5, :slow => 20}
