@@ -1,9 +1,12 @@
 require 'socket'
-Dir["./app/*"].each {|file| require file}
+Dir["./app/**/*.rb"].each {|file| load file}
 FAST = 5
 SLOW = 20
 m = MarketWatcher.new("localhost",8211,"|")
-slowvalues = 
+slowvalues = Fifo.new(10)
 m.puts("H")
-p a.insert(m.gets)
-p a
+p slowvalues.insert(m.gets)
+
+a = SMovingAverage.new(5)
+
+a.compute([1,2,3,4,5])
