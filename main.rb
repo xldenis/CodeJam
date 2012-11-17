@@ -5,8 +5,12 @@ SLOW = 20
 m = MarketWatcher.new("localhost",8211,"|")
 slowvalues = Fifo.new(10)
 m.puts("H")
-p slowvalues.insert(m.gets)
 
-a = SMovingAverage.new(5)
 
-a.compute([1,2,3,4,5])
+a = SMovingAverage.new(10)
+
+until (t = m.gets).include? "C" do 
+
+  slowvalues.insert(t.to_f)
+  p a.compute(slowvalues)
+end
