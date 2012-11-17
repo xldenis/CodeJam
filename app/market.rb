@@ -23,5 +23,8 @@ def get_all
   until gets.include? "C" do end
 
 end
-
+def begin
+  puts("H")
+  get_all
+end
 end

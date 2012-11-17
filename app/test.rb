@@ -11,4 +11,9 @@ class TestSubscriber
     p var
     @count+=1
   end
+  def go
+    while true do
+    publish("EMovingAverage_20","test")
+  end
+  end
 end
