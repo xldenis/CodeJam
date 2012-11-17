@@ -1,7 +1,7 @@
 class SMovingAverage
 	def initialize(term)
 		@term = term
-		@currentAverage = 0
+		@current_average = 0
 		@first = 0
 	end
 
@@ -9,12 +9,12 @@ class SMovingAverage
 		if prices.count <= @term
 			sum = 0
 			prices.each{|i| sum += i}
-			@currentAverage = (1.0/prices.count)*sum
+			@current_average = (1.0/prices.count)*sum
 		else
-			@currentAverage -= @first
+			@current_average -= @first
 			@first = prices.first
-			@currentAverage = @currentAverage - (@first/@term) + (prices.last/@term)
+			@current_average = @current_average - (@first/@term) + (prices.last/@term)
 		end
-		@currentAverage
+		@current_average
 	end
 end
