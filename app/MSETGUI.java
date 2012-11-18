@@ -1,6 +1,9 @@
 import javax.swing.*;
+import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
+import java.awt.geom.*;
+import java.awt.font.*;
 
 public class MSETGUI extends javax.swing.JFrame 
 {
@@ -157,7 +160,7 @@ public class MSETGUI extends javax.swing.JFrame
         );
     }
 
-    private class ClickListener extends ActionListener
+    private class ClickListener implements ActionListener
     {
     	public void actionPerformed(ActionEvent event)
     	{
@@ -179,14 +182,15 @@ public class MSETGUI extends javax.swing.JFrame
 
     	public void run()
     	{
-    		graph = new GraphingData();
+    		graph = new GraphingData(data);
     		graph.revalidate();
     		graph.repaint();
     	}
     }
 
-	private class GraphingData extends JPanel {
-    ArrayList<Float> data = new ArrayList<Float>();
+	private class GraphingData extends JPanel 
+	{
+    	ArrayList<Float> data = new ArrayList<Float>();
     final int PAD = 20;
 
     public GraphingData(float input)
@@ -241,16 +245,16 @@ public class MSETGUI extends javax.swing.JFrame
         g2.setPaint(Color.red);
         for(int i = 0; i < data.size(); i++) {
             double x = PAD + i*xInc;
-            double y = h - PAD - scale*data[i];
+            double y = h - PAD - scale*data.get(i);
             g2.fill(new Ellipse2D.Double(x-2, y-2, 4, 4));
         }
     }
  
-    private int getMax() {
-        int max = -Integer.MAX_VALUE;
+    private float getMax() {
+        float max = -Float.MAX_VALUE;
         for(int i = 0; i < data.size(); i++) {
-            if(data[i] > max)
-                max = data[i];
+            if(data.get(i) > max)
+                max = data.get(i);
         }
         return max;
     }
